@@ -1,10 +1,21 @@
+import { useContext } from 'react';
+import { signOut } from 'firebase/auth';
+import { auth } from '../firebase';
+import { AuthContext } from '../context/AuthContext';
+
 const Main = () => {
+  const { currentUser } = useContext(AuthContext);
+
+  const handleSignOut = () => {
+    signOut(auth);
+  };
+
   return (
     <div className="main">
       <div className="main__sidebar sidebar">
         <div className="sidebar__top">
-          <span>Khasanov Yevhen</span>
-          <button>logout</button>
+          <span>{currentUser.displayName}</span>
+          <button onClick={handleSignOut}>logout</button>
         </div>
         <div className="sidebar__content">
           <div className="item">
